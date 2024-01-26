@@ -15,65 +15,10 @@ import { Input } from '../../components/Input'
 import { FilterSelect } from '../../components/FilterSelect'
 import { FilterButton } from '../../components/FilterButton'
 import { FilterCheckbox } from '../../components/FilterCheckbox'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { filterButtons } from '../../utils/filterButtons'
 
-const data = [
-  {
-    name: {
-      common: 'Andorra',
-    },
-    region: 'Europe',
-    area: 468,
-    population: 77265,
-    flags: {
-      png: 'https://flagcdn.com/w320/ad.png',
-    },
-    unMember: true,
-    independent: true,
-  },
-  {
-    name: {
-      common: 'French Southern and Antarctic Lands',
-    },
-    region: 'Antarctic',
-    area: 468,
-    population: 772651,
-    flags: {
-      png: 'https://flagcdn.com/w320/tf.png',
-    },
-    unMember: false,
-    independent: false,
-  },
-  {
-    name: {
-      common: 'Laos',
-    },
-    region: 'Asia',
-    area: 468,
-    population: 772265,
-    flags: {
-      png: 'https://flagcdn.com/w320/la.png',
-    },
-    unMember: false,
-    independent: true,
-  },
-  {
-    name: {
-      common: 'Canada',
-    },
-    region: 'Americas',
-    area: 468,
-    population: 772635,
-    flags: {
-      png: 'https://flagcdn.com/w320/ca.png',
-    },
-    unMember: true,
-    independent: false,
-  },
-]
-
-interface ContentTableProps {
+interface CountriesDataProps {
   name: {
     common: string
   }
@@ -92,6 +37,7 @@ export function Home() {
   const [independent, setIndependent] = useState(false)
   const [filterRegion, setFilterRegion] = useState<string[]>([])
   const [order, setOrder] = useState<string>('Alphabetical')
+  const [countriesData, setCountriesData] = useState<CountriesDataProps[]>([])
 
   function handleRegionFilter(region: string) {
     if (filterRegion.includes(region)) {
@@ -101,7 +47,7 @@ export function Home() {
     }
   }
 
-  function filterData(dados: ContentTableProps[]) {
+  function filterData(dados: CountriesDataProps[]) {
     return dados.filter((pais) => {
       return (
         (!UNMember || pais.unMember) &&
@@ -111,7 +57,7 @@ export function Home() {
     })
   }
 
-  function sortData(dados: ContentTableProps[]) {
+  function sortData(dados: CountriesDataProps[]) {
     switch (order) {
       case 'Alphabetical':
         return [...dados].sort((a, b) =>
@@ -125,6 +71,17 @@ export function Home() {
         return dados
     }
   }
+
+  useEffect(() => {
+    fetch('https://restcountries.com/v3.1/all')
+      .then((response) => response.json())
+      .then((data) => {
+        setCountriesData(data)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }, [])
 
   return (
     <>
@@ -182,7 +139,7 @@ export function Home() {
             </ParametersContainer>
             <ContentContainer>
               <HeaderTable>
-                {sortData(filterData(data)).map((item) => (
+                {sortData(filterData(countriesData)).map((item) => (
                   <ContentTable key={item.name.common} data={item} />
                 ))}
               </HeaderTable>
