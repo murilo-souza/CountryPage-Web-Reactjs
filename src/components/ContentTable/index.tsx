@@ -25,8 +25,8 @@ export function ContentTable({ data }: ContentTableDataProps) {
         </ImageContainer>
       </td>
       <td>{data.name.common}</td>
-      <td>{data.population}</td>
-      <td>{data.area}</td>
+      <td>{data.population.toLocaleString('en-US')}</td>
+      <td>{data.area.toLocaleString('en-US')}</td>
       <td>{data.region}</td>
     </Container>
   )
