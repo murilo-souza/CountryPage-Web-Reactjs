@@ -1,6 +1,7 @@
 import {
   Container,
   ContentContainer,
+  FilterButtonWrapper,
   HeadContainer,
   HomeContainer,
   ParametersContainer,
@@ -12,6 +13,7 @@ import { ContentTable } from '../../components/ContentTable'
 import { HeaderTable } from '../../components/HeaderTable'
 import { Input } from '../../components/Input'
 import { FilterSelect } from '../../components/FilterSelect'
+import { FilterButton } from '../../components/FilterButton'
 
 const data = [
   {
@@ -76,7 +78,14 @@ export function Home() {
                 <FilterSelect />
               </FilterWrapper>
               <FilterWrapper title="Region">
-                <select name="Selecionar" id=""></select>
+                <FilterButtonWrapper>
+                  <FilterButton title="Americas" selected />
+                  <FilterButton title="Antarctic" selected={false} />
+                  <FilterButton title="Africa" selected />
+                  <FilterButton title="Asia" selected />
+                  <FilterButton title="Europe" selected />
+                  <FilterButton title="Oceania" selected />
+                </FilterButtonWrapper>
               </FilterWrapper>
               <FilterWrapper title="Status">
                 <select name="Selecionar" id=""></select>

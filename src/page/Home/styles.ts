@@ -36,6 +36,14 @@ export const TableContainer = styled.div`
   grid-gap: 2rem;
 `
 
+export const FilterButtonWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+
+  gap: 0.5rem;
+`
+
 export const ParametersContainer = styled.section``
 
 export const ContentContainer = styled.section``
