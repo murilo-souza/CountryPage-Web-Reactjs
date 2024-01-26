@@ -1,15 +1,18 @@
+import { SelectHTMLAttributes } from 'react'
 import { Container, SelectItem } from './styles'
 
-export function FilterSelect() {
+type SelectProps = SelectHTMLAttributes<HTMLSelectElement>
+
+export function FilterSelect({ ...rest }: SelectProps) {
   return (
-    <Container>
+    <Container {...rest}>
       <SelectItem label="Population" value="Population">
         Population
       </SelectItem>
       <SelectItem label="Area" value="Area">
         Area
       </SelectItem>
-      <SelectItem label="Alphabetical order" value="Alphabetical order">
+      <SelectItem label="Alphabetical" value="Alphabetical order">
         Alphabetical order
       </SelectItem>
     </Container>

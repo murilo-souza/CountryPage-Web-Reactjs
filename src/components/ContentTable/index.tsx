@@ -10,6 +10,8 @@ interface ContentTableProps {
   flags: {
     png: string
   }
+  unMember: boolean
+  independent: boolean
 }
 
 interface ContentTableDataProps {
