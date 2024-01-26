@@ -31,7 +31,7 @@ export const HomeContainer = styled.main`
 
 export const TableContainer = styled.div`
   display: grid;
-  grid-template-columns: 20% 80%;
+  grid-template-columns: 22% 78%;
 
   grid-gap: 2rem;
 `

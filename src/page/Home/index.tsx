@@ -14,6 +14,8 @@ import { HeaderTable } from '../../components/HeaderTable'
 import { Input } from '../../components/Input'
 import { FilterSelect } from '../../components/FilterSelect'
 import { FilterButton } from '../../components/FilterButton'
+import { FilterCheckbox } from '../../components/FilterCheckbox'
+import { useState } from 'react'
 
 const data = [
   {
@@ -63,6 +65,11 @@ const data = [
 ]
 
 export function Home() {
+  const [UNMember, setUNMember] = useState(false)
+  const [independent, setIndependent] = useState(false)
+
+  console.log(UNMember, independent)
+
   return (
     <>
       <Container>
@@ -88,7 +95,28 @@ export function Home() {
                 </FilterButtonWrapper>
               </FilterWrapper>
               <FilterWrapper title="Status">
-                <select name="Selecionar" id=""></select>
+                <FilterCheckbox
+                  title="Member of the United Nations"
+                  checked={UNMember}
+                  onChange={(checked) => {
+                    if (checked === true) {
+                      setUNMember(true)
+                    } else {
+                      setUNMember(false)
+                    }
+                  }}
+                />
+                <FilterCheckbox
+                  title="Independent"
+                  checked={independent}
+                  onChange={(checked) => {
+                    if (checked === true) {
+                      setIndependent(true)
+                    } else {
+                      setIndependent(false)
+                    }
+                  }}
+                />
               </FilterWrapper>
             </ParametersContainer>
             <ContentContainer>
