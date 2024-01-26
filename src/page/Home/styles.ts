@@ -15,7 +15,9 @@ export const HomeContainer = styled.main`
   border-radius: 8px;
 
   display: grid;
-  grid-template-columns: 10rem 1fr;
+  grid-template-columns: 20% 80%;
+
+  grid-gap: 2rem;
 `
 
 export const ParametersContainer = styled.section``
