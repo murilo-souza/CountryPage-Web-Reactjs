@@ -11,6 +11,7 @@ import { FilterWrapper } from '../../components/FilterWrapper'
 import { ContentTable } from '../../components/ContentTable'
 import { HeaderTable } from '../../components/HeaderTable'
 import { Input } from '../../components/Input'
+import { FilterSelect } from '../../components/FilterSelect'
 
 const data = [
   {
@@ -72,7 +73,7 @@ export function Home() {
           <TableContainer>
             <ParametersContainer>
               <FilterWrapper title="Sort by">
-                <select name="Selecionar" id=""></select>
+                <FilterSelect />
               </FilterWrapper>
               <FilterWrapper title="Region">
                 <select name="Selecionar" id=""></select>

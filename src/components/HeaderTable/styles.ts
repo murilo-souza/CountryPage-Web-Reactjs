@@ -12,7 +12,7 @@ export const Container = styled.table`
       font-size: 0.75rem;
       padding: 1rem;
       text-align: left;
-      border-bottom: 1px solid ${(props) => props.theme.colors.gray300};
+      border-bottom: 2px solid ${(props) => props.theme.colors.gray700};
     }
   }
 
