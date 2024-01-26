@@ -10,6 +10,7 @@ import BgHero from '../../assets/hero-image-wr.jpg'
 import { FilterWrapper } from '../../components/FilterWrapper'
 import { ContentTable } from '../../components/ContentTable'
 import { HeaderTable } from '../../components/HeaderTable'
+import { Input } from '../../components/Input'
 
 const data = [
   {
@@ -66,7 +67,7 @@ export function Home() {
         <HomeContainer>
           <HeadContainer>
             <span>Found 243 countries</span>
-            <input type="text" />
+            <Input placeholder="Search by Name, Region, Subregion" />
           </HeadContainer>
           <TableContainer>
             <ParametersContainer>

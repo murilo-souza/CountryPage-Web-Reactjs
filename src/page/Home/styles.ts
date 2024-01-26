@@ -25,7 +25,7 @@ export const HomeContainer = styled.main`
   padding: 1rem 2.5rem;
   margin: 5rem auto;
 
-  background: ${(props) => props.theme.colors.gray700};
+  background: ${(props) => props.theme.colors.gray800};
   border-radius: 8px;
 `
 
