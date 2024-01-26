@@ -1,8 +1,10 @@
 import {
   Container,
   ContentContainer,
+  HeadContainer,
   HomeContainer,
   ParametersContainer,
+  TableContainer,
 } from './styles'
 import BgHero from '../../assets/hero-image-wr.jpg'
 import { FilterWrapper } from '../../components/FilterWrapper'
@@ -58,28 +60,36 @@ const data = [
 
 export function Home() {
   return (
-    <Container>
-      <img src={BgHero} alt="Hero" />
-      <HomeContainer>
-        <ParametersContainer>
-          <FilterWrapper title="Sort by">
-            <select name="Selecionar" id=""></select>
-          </FilterWrapper>
-          <FilterWrapper title="Region">
-            <select name="Selecionar" id=""></select>
-          </FilterWrapper>
-          <FilterWrapper title="Status">
-            <select name="Selecionar" id=""></select>
-          </FilterWrapper>
-        </ParametersContainer>
-        <ContentContainer>
-          <HeaderTable>
-            {data.map((item) => (
-              <ContentTable key={item.name.common} data={item} />
-            ))}
-          </HeaderTable>
-        </ContentContainer>
-      </HomeContainer>
-    </Container>
+    <>
+      <Container>
+        <img src={BgHero} alt="Hero" />
+        <HomeContainer>
+          <HeadContainer>
+            <span>Found 243 countries</span>
+            <input type="text" />
+          </HeadContainer>
+          <TableContainer>
+            <ParametersContainer>
+              <FilterWrapper title="Sort by">
+                <select name="Selecionar" id=""></select>
+              </FilterWrapper>
+              <FilterWrapper title="Region">
+                <select name="Selecionar" id=""></select>
+              </FilterWrapper>
+              <FilterWrapper title="Status">
+                <select name="Selecionar" id=""></select>
+              </FilterWrapper>
+            </ParametersContainer>
+            <ContentContainer>
+              <HeaderTable>
+                {data.map((item) => (
+                  <ContentTable key={item.name.common} data={item} />
+                ))}
+              </HeaderTable>
+            </ContentContainer>
+          </TableContainer>
+        </HomeContainer>
+      </Container>
+    </>
   )
 }
