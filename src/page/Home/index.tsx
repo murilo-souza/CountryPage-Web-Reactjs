@@ -1,9 +1,12 @@
 import {
+  BGImage,
   Container,
   ContentContainer,
   FilterButtonWrapper,
   HeadContainer,
   HomeContainer,
+  ImageContainer,
+  LogoImg,
   ParametersContainer,
   TableContainer,
 } from './styles'
@@ -17,12 +20,14 @@ import { FilterButton } from '../../components/FilterButton'
 import { FilterCheckbox } from '../../components/FilterCheckbox'
 import { useEffect, useState } from 'react'
 import { filterButtons } from '../../utils/filterButtons'
+import Logo from '../../assets/Logo.svg'
 
 interface CountriesDataProps {
   name: {
     common: string
   }
   region: string
+  subregion: string
   area: number
   population: number
   flags: {
@@ -36,8 +41,9 @@ export function Home() {
   const [UNMember, setUNMember] = useState(false)
   const [independent, setIndependent] = useState(false)
   const [filterRegion, setFilterRegion] = useState<string[]>([])
-  const [order, setOrder] = useState<string>('Alphabetical')
+  const [order, setOrder] = useState<string>('Population')
   const [countriesData, setCountriesData] = useState<CountriesDataProps[]>([])
+  const [search, setSearch] = useState('')
 
   function handleRegionFilter(region: string) {
     if (filterRegion.includes(region)) {
@@ -47,28 +53,42 @@ export function Home() {
     }
   }
 
-  function filterData(dados: CountriesDataProps[]) {
-    return dados.filter((pais) => {
+  function filterData(data: CountriesDataProps[]) {
+    let dataFiltered = data.filter((pais) => {
       return (
         (!UNMember || pais.unMember) &&
         (!independent || pais.independent) &&
         (filterRegion.length === 0 || filterRegion.includes(pais.region))
       )
     })
+
+    if (search !== '') {
+      dataFiltered = dataFiltered.filter(
+        (item) =>
+          item.name.common.toLowerCase().includes(search.toLowerCase()) ||
+          item.region.toLowerCase().includes(search.toLowerCase()) ||
+          (item.subregion !== undefined &&
+            item.subregion.toLowerCase().includes(search.toLowerCase())),
+      )
+
+      return dataFiltered
+    }
+
+    return dataFiltered
   }
 
-  function sortData(dados: CountriesDataProps[]) {
+  function sortData(data: CountriesDataProps[]) {
     switch (order) {
       case 'Alphabetical':
-        return [...dados].sort((a, b) =>
+        return [...data].sort((a, b) =>
           a.name.common.localeCompare(b.name.common),
         )
       case 'Area':
-        return [...dados].sort((a, b) => b.area - a.area)
+        return [...data].sort((a, b) => b.area - a.area)
       case 'Population':
-        return [...dados].sort((a, b) => b.population - a.population)
+        return [...data].sort((a, b) => b.population - a.population)
       default:
-        return dados
+        return data
     }
   }
 
@@ -86,11 +106,20 @@ export function Home() {
   return (
     <>
       <Container>
-        <img src={BgHero} alt="Hero" />
+        <ImageContainer>
+          <LogoImg src={Logo} alt="Logo" />
+          <BGImage src={BgHero} alt="Hero" />
+        </ImageContainer>
         <HomeContainer>
           <HeadContainer>
-            <span>Found 243 countries</span>
-            <Input placeholder="Search by Name, Region, Subregion" />
+            <span>
+              Found {sortData(filterData(countriesData)).length} countries
+            </span>
+            <Input
+              placeholder="Search by Name, Region, Subregion"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
           </HeadContainer>
           <TableContainer>
             <ParametersContainer>

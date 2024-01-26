@@ -5,6 +5,7 @@ interface ContentTableProps {
     common: string
   }
   region: string
+  subregion: string
   area: number
   population: number
   flags: {

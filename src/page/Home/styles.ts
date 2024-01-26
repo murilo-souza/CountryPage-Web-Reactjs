@@ -14,16 +14,30 @@ export const HeadContainer = styled.header`
   }
 `
 
-export const Container = styled.main`
-  img {
-    width: 100%;
-  }
+export const Container = styled.main``
+
+export const ImageContainer = styled.div`
+  width: 100%;
+`
+
+export const BGImage = styled.img`
+  width: 100%;
+
+  position: relative;
+
+  z-index: -1;
+`
+export const LogoImg = styled.img`
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `
 
 export const HomeContainer = styled.main`
   max-width: 74rem;
   padding: 1rem 2.5rem;
-  margin: 5rem auto;
+  margin: -5rem auto 2rem auto;
 
   background: ${(props) => props.theme.colors.gray800};
   border-radius: 8px;
