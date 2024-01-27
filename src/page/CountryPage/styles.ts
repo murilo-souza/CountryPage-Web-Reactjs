@@ -22,20 +22,20 @@ export const LogoImg = styled.img`
 
 export const CountryContainer = styled.main`
   max-width: 50rem;
-  padding: 1rem 2.5rem;
   margin: -5rem auto 2rem auto;
 
   background: ${(props) => props.theme.colors.gray800};
   border-radius: 8px;
 
+  border: 1px solid ${(props) => props.theme.colors.gray700};
+
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+`
+export const ContentContainer = styled.main`
   display: flex;
   flex-direction: column;
 
   align-items: center;
-
-  border: 1px solid ${(props) => props.theme.colors.gray700};
-
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 `
 
 export const CountryImageContainer = styled.div`
@@ -74,4 +74,33 @@ export const BadgeContainer = styled.section`
   gap: 2rem;
 
   margin-top: 2rem;
+
+  margin-bottom: 2rem;
+`
+
+export const FooterContainer = styled.footer`
+  display: flex;
+  flex-direction: column;
+
+  justify-content: flex-start;
+
+  margin-bottom: 3rem;
+`
+
+export const Label = styled.label`
+  font-size: 0.75rem;
+  font-weight: 400;
+
+  color: ${(props) => props.theme.colors.gray300};
+
+  text-align: left;
+
+  margin-left: 1.25rem;
+
+  margin-bottom: 1rem;
+`
+
+export const FlagContainer = styled.div`
+  display: flex;
+  align-items: center;
 `
