@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 
 export const Container = styled.main``
@@ -84,7 +85,7 @@ export const FooterContainer = styled.footer`
 
   justify-content: flex-start;
 
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 `
 
 export const Label = styled.label`
@@ -109,4 +110,20 @@ export const FlagContainer = styled.div`
   .embla__slide {
     min-width: 6rem;
   }
+`
+
+export const GoBackToHome = styled(NavLink)`
+  text-decoration: none;
+
+  font-size: 1rem;
+  font-weight: 400;
+
+  color: ${(props) => props.theme.colors.gray100};
+
+  &:hover {
+    color: ${(props) => props.theme.colors.gray300};
+  }
+
+  margin-top: 2rem;
+  margin-left: 1.25rem;
 `

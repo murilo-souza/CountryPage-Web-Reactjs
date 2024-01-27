@@ -9,6 +9,7 @@ import {
   CountryName,
   FlagContainer,
   FooterContainer,
+  GoBackToHome,
   ImageBgContainer,
   Label,
   LogoImg,
@@ -187,6 +188,7 @@ export function CountryPage() {
               ))}
             </FlagContainer>
           </div>
+          <GoBackToHome to="/">Return to Home Page</GoBackToHome>
         </FooterContainer>
       </CountryContainer>
     </Container>
