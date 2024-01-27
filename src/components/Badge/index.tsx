@@ -2,7 +2,7 @@ import { Container, Divider } from './styles'
 
 interface BadgeProps {
   title: string
-  value: string
+  value: number
 }
 
 export function Badge({ title, value }: BadgeProps) {
@@ -10,7 +10,7 @@ export function Badge({ title, value }: BadgeProps) {
     <Container>
       <h3>{title}</h3>
       <Divider />
-      <span>{value}</span>
+      <span>{value !== undefined && value.toLocaleString('en-US')}</span>
     </Container>
   )
 }

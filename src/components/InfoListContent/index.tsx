@@ -1,15 +1,9 @@
 import { Container } from './styles'
 
 interface InfoListContentProps {
-  title: string
-  content: string
+  children: React.ReactNode
 }
 
-export function InfoListContent({ title, content }: InfoListContentProps) {
-  return (
-    <Container>
-      <h4>{title}</h4>
-      <span>{content}</span>
-    </Container>
-  )
+export function InfoListContent({ children }: InfoListContentProps) {
+  return <Container>{children}</Container>
 }
