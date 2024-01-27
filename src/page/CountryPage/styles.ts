@@ -103,4 +103,6 @@ export const Label = styled.label`
 export const FlagContainer = styled.div`
   display: flex;
   align-items: center;
+
+  overflow: hidden;
 `

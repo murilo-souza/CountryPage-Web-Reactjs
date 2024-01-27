@@ -27,10 +27,28 @@ interface CountryDataProps {
     official: string
   }
   capital: string[]
+  borders: string[]
   continents: string[]
   subregion: string
   area: number
   population: number
+  languages: {
+    [key: string]: string
+  }
+  currencies: {
+    [key: string]: {
+      name: string
+    }
+  }
+  flags: {
+    png: string
+  }
+}
+
+interface NeighborCountryProps {
+  name: {
+    common: string
+  }
   flags: {
     png: string
   }
@@ -38,6 +56,11 @@ interface CountryDataProps {
 
 export function CountryPage() {
   const [countryData, setCountryData] = useState<CountryDataProps[]>([])
+  const [neighborCountry, setNeighborCountry] = useState<
+    NeighborCountryProps[][]
+  >([])
+  const [loading, setLoading] = useState(true)
+
   const { country } = useParams()
 
   useEffect(() => {
@@ -45,11 +68,34 @@ export function CountryPage() {
       .then((response) => response.json())
       .then((data) => {
         setCountryData(data)
+        if (data[0]?.borders !== undefined) {
+          Promise.all(
+            data[0]?.borders.map(async (border: string) => {
+              const borderResponse = await fetch(
+                `https://restcountries.com/v3.1/alpha/${border.toLowerCase()}`,
+              )
+              return borderResponse.json()
+            }),
+          )
+            .then((borderCountries) => {
+              setNeighborCountry(borderCountries)
+              setLoading(false)
+            })
+            .catch((error) => {
+              console.error('Error fetching neighbor countries:', error)
+            })
+        }
       })
       .catch((error) => {
         console.log(error)
       })
   }, [country])
+
+  console.log()
+
+  if (loading) {
+    return <h1>Carregando....</h1>
+  }
 
   return (
     <Container>
@@ -80,11 +126,31 @@ export function CountryPage() {
           </InfoListContent>
           <InfoListContent>
             <h4>Language</h4>
-            <span>{}</span>
+            <div>
+              {countryData[0]?.languages !== undefined &&
+                Object.values(countryData[0]?.languages).map(
+                  (item, index, array) => (
+                    <span key={item}>
+                      {item}
+                      {index !== array.length - 1 && ', '}
+                    </span>
+                  ),
+                )}
+            </div>
           </InfoListContent>
           <InfoListContent>
             <h4>Currencies</h4>
-            <span>{}</span>
+            <div>
+              {countryData[0]?.currencies !== undefined &&
+                Object.values(countryData[0]?.currencies).map(
+                  (item, index, array) => (
+                    <span key={item.name}>
+                      {item.name}
+                      {index !== array.length - 1 && ', '}
+                    </span>
+                  ),
+                )}
+            </div>
           </InfoListContent>
           <InfoListContent>
             <h4>Continents</h4>
@@ -102,7 +168,18 @@ export function CountryPage() {
         <FooterContainer>
           <Label>Neighbouring Countries</Label>
           <FlagContainer>
-            <Flag flag="https://flagcdn.com/w320/ng.png" name="Nigeria" />
+            {!loading &&
+              neighborCountry &&
+              neighborCountry.length > 0 &&
+              neighborCountry.map((item, i) =>
+                item.map((country) => (
+                  <Flag
+                    key={i}
+                    png={country.flags.png}
+                    common={country.name.common}
+                  />
+                )),
+              )}
           </FlagContainer>
         </FooterContainer>
       </CountryContainer>

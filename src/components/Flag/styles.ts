@@ -1,6 +1,9 @@
+import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 
-export const Container = styled.div`
+export const Container = styled(NavLink)`
+  text-decoration: none;
+
   display: flex;
   flex-direction: column;
 

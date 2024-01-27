@@ -1,17 +1,17 @@
 import { Container, ImageContainer } from './styles'
 
 interface FlagProps {
-  flag: string
-  name: string
+  png: string
+  common: string
 }
 
-export function Flag({ flag, name }: FlagProps) {
+export function Flag({ png, common }: FlagProps) {
   return (
-    <Container>
+    <Container to={`/country-page/${common.toLowerCase()}`}>
       <ImageContainer>
-        <img src={flag} alt="Flag" />
+        <img src={png} alt="Flag" />
       </ImageContainer>
-      <span>{name}</span>
+      <span>{common}</span>
     </Container>
   )
 }
