@@ -14,6 +14,8 @@ export const Container = styled(NavLink)`
     font-weight: 400;
 
     color: ${(props) => props.theme.colors.gray100};
+
+    text-align: center;
   }
 
   margin-left: 1.25rem;

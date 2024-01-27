@@ -104,5 +104,9 @@ export const FlagContainer = styled.div`
   display: flex;
   align-items: center;
 
-  overflow: hidden;
+  margin-right: 1rem;
+
+  .embla__slide {
+    min-width: 6rem;
+  }
 `

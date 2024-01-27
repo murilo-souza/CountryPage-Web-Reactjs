@@ -20,6 +20,7 @@ import { InfoListContent } from '../../components/InfoListContent'
 import { Flag } from '../../components/Flag'
 import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
+import useEmblaCarousel from 'embla-carousel-react'
 
 interface CountryDataProps {
   name: {
@@ -63,6 +64,12 @@ export function CountryPage() {
 
   const { country } = useParams()
 
+  const [emblaRef] = useEmblaCarousel({
+    align: 'start',
+    skipSnaps: false,
+    dragFree: true,
+  })
+
   useEffect(() => {
     fetch(`https://restcountries.com/v3.1/name/${country}?fullText=true`)
       .then((response) => response.json())
@@ -90,8 +97,6 @@ export function CountryPage() {
         console.log(error)
       })
   }, [country])
-
-  console.log()
 
   if (loading) {
     return <h1>Carregando....</h1>
@@ -167,20 +172,21 @@ export function CountryPage() {
         <br />
         <FooterContainer>
           <Label>Neighbouring Countries</Label>
-          <FlagContainer>
-            {!loading &&
-              neighborCountry &&
-              neighborCountry.length > 0 &&
-              neighborCountry.map((item, i) =>
-                item.map((country) => (
-                  <Flag
-                    key={i}
-                    png={country.flags.png}
-                    common={country.name.common}
-                  />
-                )),
-              )}
-          </FlagContainer>
+          <div className="embla" ref={emblaRef} style={{ overflow: 'hidden' }}>
+            <FlagContainer className="embla__container container">
+              {neighborCountry.map((item) => (
+                <>
+                  {item.map((country) => (
+                    <Flag
+                      key={country.name.common + Math.random()}
+                      png={country.flags.png}
+                      common={country.name.common}
+                    />
+                  ))}
+                </>
+              ))}
+            </FlagContainer>
+          </div>
         </FooterContainer>
       </CountryContainer>
     </Container>
