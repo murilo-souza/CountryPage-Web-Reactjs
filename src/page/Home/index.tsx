@@ -104,78 +104,76 @@ export function Home() {
   }, [])
 
   return (
-    <>
-      <Container>
-        <ImageContainer>
-          <LogoImg src={Logo} alt="Logo" />
-          <BGImage src={BgHero} alt="Hero" />
-        </ImageContainer>
-        <HomeContainer>
-          <HeadContainer>
-            <span>
-              Found {sortData(filterData(countriesData)).length} countries
-            </span>
-            <Input
-              placeholder="Search by Name, Region, Subregion"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-          </HeadContainer>
-          <TableContainer>
-            <ParametersContainer>
-              <FilterWrapper title="Sort by">
-                <FilterSelect
-                  value={order}
-                  onChange={(e) => setOrder(e.target.value)}
-                />
-              </FilterWrapper>
-              <FilterWrapper title="Region">
-                <FilterButtonWrapper>
-                  {filterButtons.map((item) => (
-                    <FilterButton
-                      key={item.title}
-                      title={item.title}
-                      selected={filterRegion.includes(item.title)}
-                      onClick={() => handleRegionFilter(item.title)}
-                    />
-                  ))}
-                </FilterButtonWrapper>
-              </FilterWrapper>
-              <FilterWrapper title="Status">
-                <FilterCheckbox
-                  title="Member of the United Nations"
-                  checked={UNMember}
-                  onChange={(checked) => {
-                    if (checked === true) {
-                      setUNMember(true)
-                    } else {
-                      setUNMember(false)
-                    }
-                  }}
-                />
-                <FilterCheckbox
-                  title="Independent"
-                  checked={independent}
-                  onChange={(checked) => {
-                    if (checked === true) {
-                      setIndependent(true)
-                    } else {
-                      setIndependent(false)
-                    }
-                  }}
-                />
-              </FilterWrapper>
-            </ParametersContainer>
-            <ContentContainer>
-              <HeaderTable>
-                {sortData(filterData(countriesData)).map((item) => (
-                  <ContentTable key={item.name.common} data={item} />
+    <Container>
+      <ImageContainer>
+        <LogoImg src={Logo} alt="Logo" />
+        <BGImage src={BgHero} alt="Hero" />
+      </ImageContainer>
+      <HomeContainer>
+        <HeadContainer>
+          <span>
+            Found {sortData(filterData(countriesData)).length} countries
+          </span>
+          <Input
+            placeholder="Search by Name, Region, Subregion"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </HeadContainer>
+        <TableContainer>
+          <ParametersContainer>
+            <FilterWrapper title="Sort by">
+              <FilterSelect
+                value={order}
+                onChange={(e) => setOrder(e.target.value)}
+              />
+            </FilterWrapper>
+            <FilterWrapper title="Region">
+              <FilterButtonWrapper>
+                {filterButtons.map((item) => (
+                  <FilterButton
+                    key={item.title}
+                    title={item.title}
+                    selected={filterRegion.includes(item.title)}
+                    onClick={() => handleRegionFilter(item.title)}
+                  />
                 ))}
-              </HeaderTable>
-            </ContentContainer>
-          </TableContainer>
-        </HomeContainer>
-      </Container>
-    </>
+              </FilterButtonWrapper>
+            </FilterWrapper>
+            <FilterWrapper title="Status">
+              <FilterCheckbox
+                title="Member of the United Nations"
+                checked={UNMember}
+                onChange={(checked) => {
+                  if (checked === true) {
+                    setUNMember(true)
+                  } else {
+                    setUNMember(false)
+                  }
+                }}
+              />
+              <FilterCheckbox
+                title="Independent"
+                checked={independent}
+                onChange={(checked) => {
+                  if (checked === true) {
+                    setIndependent(true)
+                  } else {
+                    setIndependent(false)
+                  }
+                }}
+              />
+            </FilterWrapper>
+          </ParametersContainer>
+          <ContentContainer>
+            <HeaderTable>
+              {sortData(filterData(countriesData)).map((item) => (
+                <ContentTable key={item.name.common} data={item} />
+              ))}
+            </HeaderTable>
+          </ContentContainer>
+        </TableContainer>
+      </HomeContainer>
+    </Container>
   )
 }

@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom'
 import { Container, ImageContainer } from './styles'
 
 interface ContentTableProps {
@@ -23,9 +24,11 @@ export function ContentTable({ data }: ContentTableDataProps) {
   return (
     <Container>
       <td>
-        <ImageContainer>
-          <img src={data.flags.png} alt="Flag" />
-        </ImageContainer>
+        <NavLink to={`/country-page/${data.name.common.toLowerCase()}`}>
+          <ImageContainer>
+            <img src={data.flags.png} alt="Flag" />
+          </ImageContainer>
+        </NavLink>
       </td>
       <td>{data.name.common}</td>
       <td>{data.population.toLocaleString('en-US')}</td>
