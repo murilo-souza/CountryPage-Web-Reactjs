@@ -89,8 +89,11 @@ export function CountryPage() {
           <InfoListContent>
             <h4>Continents</h4>
             <div>
-              {countryData[0]?.continents.map((item) => (
-                <span key={item}>{item}, </span>
+              {countryData[0]?.continents.map((item, index, array) => (
+                <span key={item}>
+                  {item}
+                  {index !== array.length - 1 && ', '}
+                </span>
               ))}
             </div>
           </InfoListContent>
