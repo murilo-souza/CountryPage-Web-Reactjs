@@ -12,7 +12,7 @@ export function FilterSelect({ ...rest }: SelectProps) {
       <SelectItem label="Area" value="Area">
         Area
       </SelectItem>
-      <SelectItem label="Alphabetical" value="Alphabetical order">
+      <SelectItem label="Alphabetical" value="Alphabetical">
         Alphabetical order
       </SelectItem>
     </Container>
